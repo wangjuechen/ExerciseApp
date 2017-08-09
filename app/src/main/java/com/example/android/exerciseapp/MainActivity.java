@@ -1,52 +1,31 @@
 package com.example.android.exerciseapp;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.renderscript.ScriptGroup;
+
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
-    private MyReceiver myReceiver;
+public class MainActivity extends AppCompatActivity implements BlankFragment.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView mInputText = (TextView) findViewById(R.id.input_tv);
+        BlankFragment myFragment = new BlankFragment();
 
-        String InputMessage = mInputText.getText().toString();
+        if(savedInstanceState != null){
+            return;
+        }
 
-        MyIntentService.startActionFoo(this, InputMessage);
-
-        IntentFilter intentFilter = new IntentFilter(MyReceiver.ACTION_RESP);
-
-        intentFilter.addCategory(Intent.CATEGORY_DEFAULT);
-
-        myReceiver = new MyReceiver();
-
-        registerReceiver(myReceiver, intentFilter);
-
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragment_container, myFragment)
+                .commit();
 
     }
-    
 
-    public class MyReceiver extends BroadcastReceiver {
-        public static final String ACTION_RESP =
-                "com.mamlambo.intent.action.MESSAGE_PROCESSED";
-        @Override
-        public void onReceive(Context context, Intent intent) {
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
-            TextView resultView = (TextView) findViewById(R.id.output_tv);
-            String resultMessage = intent.getStringExtra(MyIntentService.INTENT_OUT_PARAM);
-            resultView.setText(resultMessage);
-            // TODO: This method is called when the BroadcastReceiver is receiving
-            // an Intent broadcast.
-            throw new UnsupportedOperationException("Not yet implemented");
-        }
     }
 }
