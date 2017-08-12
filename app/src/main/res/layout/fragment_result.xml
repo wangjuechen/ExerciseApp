@@ -1,14 +1,30 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.android.exerciseapp.ResultFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+
     <TextView
         android:id="@+id/tv_result"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_width="0dp"
+        android:layout_height="495dp"
+        android:text="@string/hello_blank_fragment"
+        app:layout_constraintTop_toTopOf="@+id/btn_sendPref"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/btn_sendPref"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Another Activity"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/tv_result"
+        android:layout_marginLeft="8dp" />
+
+</android.support.constraint.ConstraintLayout>
