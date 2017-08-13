@@ -1,12 +1,24 @@
 package com.example.android.exerciseapp;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.media.Image;
+import android.net.Uri;
+import android.provider.MediaStore;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ReceivePreferenceActivity extends AppCompatActivity {
+import java.io.IOException;
 
+import static android.R.attr.bitmap;
+import static android.provider.LiveFolders.INTENT;
+
+public class ReceivePreferenceActivity extends AppCompatActivity {
+        private Bitmap bitmap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -14,11 +26,23 @@ public class ReceivePreferenceActivity extends AppCompatActivity {
 
         TextView prefMessage = (TextView) findViewById(R.id.tv_receivedPref);
 
-        SharedPreferences sharedPreferences = getSharedPreferences(ResultFragment.PREF_NAME, MODE_PRIVATE);
+        ImageView imageView = (ImageView) findViewById(R.id.imageView);
 
-        String message = sharedPreferences.getString(ResultFragment.PREF_ARG, null);
+        Intent intent = getIntent();
 
-        prefMessage.setText(message);
+        String action = intent.getAction();
+
+        if(Intent.ACTION_SEND.equals(action)){
+            Uri imageUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            imageView.setImageBitmap(bitmap);
+
+        }
 
     }
 }

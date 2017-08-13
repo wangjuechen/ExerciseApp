@@ -15,8 +15,8 @@ public class ResultFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     public static final String ARG_BUNDLE = "bundle_message";
-    public static final String PREF_NAME = "pref_data_name";
-    public static final String PREF_ARG = "pref_data_arg";
+    public static final String INTENT_NAME = "intent_name";
+
 
     // TODO: Rename and change types of parameters
     private String mMessage;
@@ -47,15 +47,10 @@ public class ResultFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences sharedPreferences = getActivity().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                editor.putString(PREF_ARG, mMessage);
-
-                editor.apply();
 
                 Intent intent = new Intent(getActivity(), ReceivePreferenceActivity.class);
+
+                intent.putExtra(INTENT_NAME, mMessage);
 
                 startActivity(intent);
             }
@@ -73,9 +68,4 @@ public class ResultFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
     }
-
-    public void setResultMessage(String message){
-        this.mMessage = message;
-    }
-
 }
