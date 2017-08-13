@@ -1,15 +1,22 @@
 package com.example.android.exerciseapp;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ShareActionProvider;
+import android.view.Menu;
+import android.view.MenuItem;
 
 
-public class MainActivity extends AppCompatActivity implements InputFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements InputFragment.OnFragmentInteractionListener,
+ShareActionProvider.OnShareTargetSelectedListener{
 
     private InputFragment inputFragment;
     private ResultFragment resultFragment;
+    private ShareActionProvider mShareActionProvider = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +42,26 @@ public class MainActivity extends AppCompatActivity implements InputFragment.OnF
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.share_action_menu, menu);
+
+        MenuItem item = menu.findItem(R.id.menu_share_action);
+
+        mShareActionProvider  = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+        mShareActionProvider.setOnShareTargetSelectedListener(this);
+
+        return (super.onCreateOptionsMenu(menu));
+    }
+
+    private void setShareIntent(Intent shareIntent) {
+        if(mShareActionProvider != null){
+            mShareActionProvider.setShareIntent(shareIntent);
+        }
+    }
+
+
+    @Override
     public void onFragmentInteraction(String text) {
        String sendingMessage = text + SystemClock.currentThreadTimeMillis();
 
@@ -49,5 +76,10 @@ public class MainActivity extends AppCompatActivity implements InputFragment.OnF
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_content_container, resultFragment)
                 .commit();
+    }
+
+    @Override
+    public boolean onShareTargetSelected(ShareActionProvider source, Intent intent) {
+        return false;
     }
 }

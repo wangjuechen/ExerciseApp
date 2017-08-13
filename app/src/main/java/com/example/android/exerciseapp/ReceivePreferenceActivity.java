@@ -45,4 +45,6 @@ public class ReceivePreferenceActivity extends AppCompatActivity {
         }
 
     }
+
+
 }
