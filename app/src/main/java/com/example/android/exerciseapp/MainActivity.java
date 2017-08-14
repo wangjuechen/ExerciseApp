@@ -16,7 +16,7 @@ ShareActionProvider.OnShareTargetSelectedListener{
 
     private InputFragment inputFragment;
     private ResultFragment resultFragment;
-    private ShareActionProvider mShareActionProvider = null;
+    private ShareActionProvider mShareActionProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,6 @@ ShareActionProvider.OnShareTargetSelectedListener{
         MenuItem item = menu.findItem(R.id.menu_share_action);
 
         mShareActionProvider  = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
-        mShareActionProvider.setOnShareTargetSelectedListener(this);
 
         return (super.onCreateOptionsMenu(menu));
     }
