@@ -74,9 +74,9 @@ public class InputFragment extends Fragment {
 
         Button MessageSendBtn = (Button) view.findViewById(R.id.btn_sendMessage);
 
-        Button testNoticatonBtn = (Button) view.findViewById(R.id.btn_testNotification);
+        Button testNotificationBtn = (Button) view.findViewById(R.id.btn_testNotification);
 
-        testNoticatonBtn.setOnClickListener(new View.OnClickListener() {
+        testNotificationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NotificationUtils.remindUser(getContext());
