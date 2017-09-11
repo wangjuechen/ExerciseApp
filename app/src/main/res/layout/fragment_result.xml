@@ -15,7 +15,8 @@
         app:layout_constraintTop_toTopOf="@+id/btn_sendPref"
         android:layout_marginTop="0dp"
         android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        style="@style/AnotherStyle"/>
 
     <Button
         android:id="@+id/btn_sendPref"
