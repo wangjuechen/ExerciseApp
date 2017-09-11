@@ -16,7 +16,8 @@
         android:layout_marginTop="0dp"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        style="@style/AnotherStyle"/>
+        style="@style/AnotherStyle"
+        android:elevation="8dp"/>
 
     <Button
         android:id="@+id/btn_sendPref"
@@ -26,6 +27,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="8dp"
         app:layout_constraintLeft_toRightOf="@+id/tv_result"
-        android:layout_marginLeft="8dp" />
+        android:layout_marginLeft="8dp"
+        android:elevation="4dp"/>
 
 </android.support.constraint.ConstraintLayout>
